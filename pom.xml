@@ -9,5 +9,6 @@
 	<modules>
         <module>spring-basics</module>
         <module>spring-boot-basics</module>
+        <module>contact-book-server-app</module>
     </modules>
 </project>

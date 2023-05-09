@@ -1,0 +1,13 @@
+server:
+  port: 8088
+  servlet:
+    context-path: /cbook
+
+spring:
+  datasource:
+    url: jdbc:postgresql://dpg-cgvk6p0dh87joks8f1s0-a.oregon-postgres.render.com/jfsmar2023
+    username: dbuser
+    password: vFc3yQZwZaVQuhwhy658yjIubDQlYnRf
+
+  application:
+    name: contact-book-server-app
