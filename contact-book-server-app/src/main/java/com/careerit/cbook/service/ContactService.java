@@ -8,7 +8,7 @@ public interface ContactService {
 
     ContactDto addContact(ContactDto contactDto);
     ContactDto updateContact(ContactDto contactDto);
-    ContactDto removeContact(Long id);
+    boolean removeContact(Long id);
     ContactDto getContact(Long id);
     List<ContactDto> getContacts();
     List<ContactDto> search(String str);

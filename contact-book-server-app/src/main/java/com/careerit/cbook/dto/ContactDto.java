@@ -1,6 +1,5 @@
 package com.careerit.cbook.dto;
 
-import com.careerit.cbook.domain.Contact;
 import lombok.Getter;
 import lombok.Setter;
 

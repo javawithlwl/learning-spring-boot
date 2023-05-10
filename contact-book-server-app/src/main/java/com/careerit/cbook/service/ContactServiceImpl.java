@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -37,17 +38,43 @@ public class ContactServiceImpl implements ContactService {
 
   @Override
   public ContactDto updateContact(ContactDto contactDto) {
-    return null;
+    Assert.notNull(contactDto.getName(), "Name can't be empty");
+    Assert.notNull(contactDto.getEmail(), "Email can't be empty");
+    Assert.notNull(contactDto.getMobile(), "Mobile can't be empty");
+
+    Optional<Contact> optContact = contactDao.findByMobile(contactDto.getMobile());
+    if (optContact.isPresent() && optContact.get().getId()!=contactDto.getId()) {
+      log.error("Contact with mobile number : {} already exists", contactDto.getMobile());
+      throw new ContactException("Mobile number already exists");
+    }
+    Contact contact = ContactUtil.dtoToDomain(contactDto);
+    contact = contactDao.updateContact(contact);
+    contactDto = ContactUtil.domainToDto(contact);
+    log.info("Contact with id : {} is updated successfully", contactDto.getId());
+    return contactDto;
   }
 
   @Override
-  public ContactDto removeContact(Long id) {
-    return null;
+  public boolean removeContact(Long id) {
+       if(contactDao.deleteContact(id)){
+          log.info("Contact with id : {} is deleted successfully",id);
+          return true;
+      }else{
+        throw new ContactException("Contact with id : "+id+" is not found");
+      }
+
   }
 
   @Override
   public ContactDto getContact(Long id) {
-    return null;
+    Contact contact = contactDao.selectContact(id);
+    if(contact == null){
+      log.info("Contact with id : {} is not found",id);
+      throw new ContactException("Contact with id : "+id+" is not found");
+    }
+    ContactDto contactDto = ContactUtil.domainToDto(contact);
+    log.info("Contact with id : {} is found",id);
+    return contactDto;
   }
 
   @Override
@@ -60,6 +87,9 @@ public class ContactServiceImpl implements ContactService {
 
   @Override
   public List<ContactDto> search(String str) {
-    return null;
+    List<Contact> contacts = contactDao.search(str);
+    List<ContactDto> contactList = contacts.stream().map(ContactUtil::domainToDto).toList();
+    log.info("Total contacts found : {}", contactList.size());
+    return contactList;
   }
 }
