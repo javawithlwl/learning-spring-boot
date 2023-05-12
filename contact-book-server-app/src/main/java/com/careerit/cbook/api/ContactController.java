@@ -1,5 +1,6 @@
 package com.careerit.cbook.api;
 
+import com.careerit.cbook.dto.AppResponseMessage;
 import com.careerit.cbook.dto.ContactDto;
 import com.careerit.cbook.service.ContactService;
 import lombok.RequiredArgsConstructor;
@@ -28,8 +29,13 @@ public class ContactController {
     return ResponseEntity.ok(contactService.updateContact(contactDto));
   }
   @DeleteMapping("/{id}")
-  public ResponseEntity<Boolean> removeContact(@PathVariable("id") Long id){
-    return ResponseEntity.ok(contactService.removeContact(id));
+  public ResponseEntity<AppResponseMessage> removeContact(@PathVariable("id") Long id){
+    boolean isDeleted = contactService.removeContact(id);
+    if(isDeleted){
+      return ResponseEntity.ok(AppResponseMessage.builder().message("Contact is deleted successfully").build());
+    }else{
+      return ResponseEntity.ok(AppResponseMessage.builder().message("Contact is not deleted").build());
+    }
   }
   @GetMapping("/{id}")
   public ResponseEntity<ContactDto> getContact(@PathVariable("id") Long id){

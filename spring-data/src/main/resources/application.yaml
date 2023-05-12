@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://dpg-cgvk6p0dh87joks8f1s0-a.oregon-postgres.render.com/jfsmar2023
+    username: dbuser
+    password: vFc3yQZwZaVQuhwhy658yjIubDQlYnRf
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+         dialect: org.hibernate.dialect.PostgreSQLDialect
+         format_sql: true
+         default_schema: public
+
