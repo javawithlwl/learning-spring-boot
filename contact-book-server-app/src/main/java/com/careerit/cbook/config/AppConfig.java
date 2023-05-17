@@ -3,6 +3,8 @@ package com.careerit.cbook.config;
 import io.swagger.v3.oas.models.OpenAPI;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 public class AppConfig {
@@ -16,6 +18,15 @@ public class AppConfig {
                 .termsOfService("http://swagger.io/terms/")
                 .license(new io.swagger.v3.oas.models.info.License().name("Apache 2.0")
                         .url("http://springdoc.org")));
+    }
+    @Bean
+    public WebMvcConfigurer corsConfig() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**").allowedMethods("*").allowedOrigins("*");
+            }
+        };
     }
 
 }

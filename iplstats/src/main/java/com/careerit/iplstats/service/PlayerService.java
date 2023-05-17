@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface PlayerService {
     List<Player> addPlayers(List<PlayerDto> players);
+    List<Player> getPlayers(String team);
 }

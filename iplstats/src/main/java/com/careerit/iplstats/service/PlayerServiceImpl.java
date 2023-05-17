@@ -5,6 +5,7 @@ import com.careerit.iplstats.domain.TeamDetails;
 import com.careerit.iplstats.dto.PlayerDto;
 import com.careerit.iplstats.repo.PlayerRepo;
 import com.careerit.iplstats.repo.TeamDetailsRepo;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -36,5 +37,10 @@ public class PlayerServiceImpl implements  PlayerService{
     });
     log.info("Total players saved :{}",resList.size());
     return resList;
+  }
+  @Override
+  @Transactional
+  public List<Player> getPlayers(String team){
+    return playerRepo.findByTeam(team);
   }
 }

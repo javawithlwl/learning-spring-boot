@@ -1,5 +1,6 @@
 package com.careerit.iplstats.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,5 +19,6 @@ public class Player {
     private double amount;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "team", referencedColumnName = "team")
+    @JsonIgnore
     private TeamDetails teamDetails;
 }

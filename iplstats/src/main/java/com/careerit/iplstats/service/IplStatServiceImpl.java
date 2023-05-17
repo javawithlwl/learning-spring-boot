@@ -21,16 +21,20 @@ public class IplStatServiceImpl implements IplStatsService{
 
   @Override
   public List<TeamStatsDto> getTeamStats() {
-    return null;
+    return playerRepo.findTeamStat();
   }
 
   @Override
   public List<RoleStatDto> getRoleStat() {
-    return null;
+      return playerRepo.findRoleStat();
   }
 
   @Override
   public List<PlayerStatsDto> getTopPaidPlayers(int n) {
     return null;
+  }
+  @Override
+  public List<String> getTeamNames(){
+    return teamDetailsRepo.findTeamNames();
   }
 }

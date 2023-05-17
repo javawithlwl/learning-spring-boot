@@ -12,4 +12,5 @@ public interface IplStatsService {
       List<RoleStatDto> getRoleStat();
       List<PlayerStatsDto> getTopPaidPlayers(int n);
 
+      List<String> getTeamNames();
 }
